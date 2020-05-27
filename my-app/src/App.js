@@ -4,6 +4,7 @@ import ReactDOM from 'react-dom';
 
 import FacebookLogin from 'react-facebook-login';
 import { GoogleLogin } from 'react-google-login';
+import LinkedIn from 'react-linkedin-login';
 
 import './App.css';
 
@@ -17,8 +18,13 @@ function App() {
   }
 
   const responseGoogle = (response) => {
-  console.log('response Google ', response);
-}
+    console.log('response Google ', response);
+  }
+
+  // const callbackLinkedIn = ({code, redirectUri}) => {
+  //   // Login with linkedin
+  //   console.log('linkedin', code, redirectUri);
+  // }
 
   return (
     <div className="App">
@@ -29,13 +35,17 @@ function App() {
         onClick={componentClicked}
         callback={responseFacebook}
         />
-        <br/>
         <GoogleLogin
           clientId="658977310896-knrl3gka66fldh83dao2rhgbblmd4un9.apps.googleusercontent.com"
           buttonText="Login"
           onSuccess={responseGoogle}
           onFailure={responseGoogle}
           cookiePolicy={'single_host_origin'}
+        />
+        <LinkedIn
+        clientId='xxx'
+        // callback={this.callbackLinkedIn}
+        text='LinkedIn'
         />
     </div>
   );
