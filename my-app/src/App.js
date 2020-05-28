@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom';
 
 import FacebookLogin from 'react-facebook-login';
 import { GoogleLogin } from 'react-google-login';
-import LinkedIn from 'react-linkedin-login';
+import GitHubLogin from 'react-github-login';
 
 import './App.css';
 
@@ -13,40 +13,42 @@ function App() {
     console.log('response Facebook', response);
   }
 
-  const componentClicked = () => {
-    console.log('clicked');
-  }
+  // const componentClicked = () => {
+  //   console.log('clicked');
+  // }
 
   const responseGoogle = (response) => {
     console.log('response Google ', response);
   }
 
-  // const callbackLinkedIn = ({code, redirectUri}) => {
-  //   // Login with linkedin
-  //   console.log('linkedin', code, redirectUri);
-  // }
-
+  const onSuccessGithub = (response) => {
+    console.log(response);
+  } 
+  
+  const onFailureGithub = (response) => {
+    console.error(response);
+  }
   return (
     <div className="App">
       <FacebookLogin
-        appId="1088597931155576"
-        autoLoad={true}
+        appId="588578105114630"
+        autoLoad={false}
         fields="name,email,picture"
-        onClick={componentClicked}
         callback={responseFacebook}
-        />
-        <GoogleLogin
-          clientId="658977310896-knrl3gka66fldh83dao2rhgbblmd4un9.apps.googleusercontent.com"
-          buttonText="Login"
-          onSuccess={responseGoogle}
-          onFailure={responseGoogle}
-          cookiePolicy={'single_host_origin'}
-        />
-        <LinkedIn
-        clientId='xxx'
-        // callback={this.callbackLinkedIn}
-        text='LinkedIn'
-        />
+      />
+      <GoogleLogin
+        clientId="293044082601-jvb14rb5fk4ou2uovna5a6cl6t38qneh.apps.googleusercontent.com"
+        buttonText="Login"
+        onSuccess={responseGoogle}
+        // isSignedIn={true}
+        onFailure={responseGoogle}
+        cookiePolicy={'single_host_origin'}
+      />
+      <GitHubLogin clientId="38b0a88987a8d59653fc"
+        redirectUri=""
+        onSuccess={onSuccessGithub}
+        onFailure={onFailureGithub}
+      />
     </div>
   );
 }
